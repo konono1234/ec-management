@@ -1,0 +1,21 @@
+server:
+ port: 8000
+spring:
+ thymeleaf:
+  enabled: true
+  cache: false
+
+ datasource:
+    url:
+     jdbc:sqlserver://localhost:1433;InstanceName=SQLEXPRESS;databaseName=customer_sys_db;integratedsecurity=true
+    username: admin
+    password: admin
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  
+ messages:
+  basename: messages
+  cache-duration: -1
+  encoding: UTF-8
+ 
+mybatis:
+  mapper-locations: classpath*:/jp/co/arsware/com/mapper/*.xml
