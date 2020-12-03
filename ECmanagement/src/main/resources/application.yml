@@ -9,10 +9,10 @@ spring:
     cache: false
     
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:sqlserver://localhost:1433/comsize_sys_db
-    username:  
-    password: 
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:1433;databaseName=comsize_sys_db
+    username: sa
+    password: comsize
 # INTERNATIONALIZATION (MessageSourceAutoConfiguration)
   messages:
     basename: messages
