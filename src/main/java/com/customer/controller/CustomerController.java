@@ -28,6 +28,6 @@ public class CustomerController {
     } else {
       System.out.print("入ってる");
     }
-    return "customer/index";
+    return "/customer/menu";
   }
 }
