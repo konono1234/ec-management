@@ -23,7 +23,11 @@ public class CustomerController {
 
     List<CustomerBean> customerList = customerService.findAllIndex();
     model.addAttribute("customerList", customerList);
-
+    if (customerList == null) {
+      System.out.print("空っぽ");
+    } else {
+      System.out.print("入ってる");
+    }
     return "customer/index";
   }
 }

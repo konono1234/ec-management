@@ -2,12 +2,51 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="UTF-8">
-<title th:text="customer.index.title">customer.index.title</title>
+<title th:text="#{customer.index.title}">customer.index.title</title>
 <link th:href="@{webjars/bootstrap/4.5.3/css/bootstrap.min.css}" rel="stylesheet"/>
 <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 
 </head>
 <body>
+
+
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th th:text="#{cust_no}"></th>
+				<th th:text="#{last_nm}"></th>
+				<th th:text="#{first_nm}"></th>
+				<th th:text="#{gender_cd}"></th>
+				<th th:text="#{post_number}"></th>
+				<th th:text="#{home_address}"></th>
+				<th th:text="#{mail_address}"></th>
+				<th th:text="#{tel_no}"></th>
+				<th th:text="#{entry_date}"></th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="index : ${customerList}" th:object="${customerList}">
+				<td>
+					<a th:href="@{/customer/{cust_no}(cust_no=${index.cust_no})}" th:text="${index.cust_no}"></a> 
+				</td>
+				<td th:text="${index.last_nm}"></td>
+				<td th:text="${index.first_nm}"></td>
+				<td>
+					<span th:if="${index.gender_cd eq 1}">男</span>
+					<span th:if="${index.gender_cd eq 2}">女</span>
+					<span th:if="${index.gender_cd eq 3}">未定義</span>
+				</td>
+				<td th:text="${index.post_number}"></td>
+				<td th:text="${index.home_address}"></td>
+				<td th:text="${index.mail_address}"></td>
+				<td th:text="${index.tel_no}"></td>
+				<td th:text="${index.entry_date}"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 
 <table>
 

@@ -5,9 +5,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import com.customer.bean.CustomerBean;
 
+/*
+ * DBにアクセスするマッパークラスです
+ */
+
 @Mapper
 public interface CustomerMapper {
 
   @Select("select * from customer")
-  List<CustomerBean> findAll();
+  public List<CustomerBean> findAll();
 }

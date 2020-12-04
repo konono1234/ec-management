@@ -13,7 +13,7 @@ import com.customer.mapper.CustomerMapper;
 public class CustomerService {
 
   @Autowired
-  private CustomerMapper customerMapper;
+  CustomerMapper customerMapper;
 
   // selectAll
 
