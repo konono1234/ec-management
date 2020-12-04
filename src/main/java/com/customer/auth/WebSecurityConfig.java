@@ -20,13 +20,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	  
 
-	  // パスワードのハッシュ化
-	  @Bean
+	  // パスワードのハッシュ化 DB接続方式になってからコメント化を外す
+	  /*@Bean
 	  public BCryptPasswordEncoder passwordEncoder() {
 	    BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 
 	    return bcpe;
-	  }
+	  }*/
 
 	  // 静的リソースはアクセス許可
 	  public void configure(WebSecurity web) throws Exception {
@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        .loginProcessingUrl("/login") // ログインフォームのアクションに指定したURL[action="@{/login}"]を設定
 	        .usernameParameter("username") // リクエストパラメータのname属性を明示
 	        .passwordParameter("password") // リクエストパラメータのpassword属性を明示※下で設定可
-	        .defaultSuccessUrl("/menu") // ログイン成功時のurl
+	        .defaultSuccessUrl("/customer/menu") // ログイン成功時のurl
 	        .failureUrl("/login?error").permitAll().and() // ログイン失敗時のurl。パラメータでerrorを付加するｔｈ：ifでhtml上で拾うため
 	        .logout().logoutUrl("/logout") // ログアウト用のurl
 	        .logoutSuccessUrl("/login?logout") // ログアウト成功時のurl。パラメータでlogoutを付加する
