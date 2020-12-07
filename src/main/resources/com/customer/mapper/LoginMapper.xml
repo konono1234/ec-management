@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- クラス指定 -->
+<mapper namespace="com.customer.mapper.LoginMapper">
+	
+	<!-- マッピング定義 -->
+	<resultMap type="com.customer.bean.LoginUser" id="LoginUser">
+		<id column="user_id" property="user_id" />
+		<result column="user_password" property="password" />
+	</resultMap>
+	
+	<!-- 1件検索 -->
+	<select id="findUser" parameterType="string" resultMap="LoginUser">
+		SELECT *
+		FROM userinfo
+		WHERE user_id = #{user_id}
+	</select>
+</mapper>

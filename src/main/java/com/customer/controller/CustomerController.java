@@ -71,10 +71,8 @@ public class CustomerController {
       }
 
     }
-<<<<<<< HEAD
-    return "/customer/menu";
-=======
->>>>>>> develop
+    
+
   }
 
   /*
