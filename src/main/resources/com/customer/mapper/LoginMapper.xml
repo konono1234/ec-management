@@ -12,7 +12,7 @@
 	</resultMap>
 	
 	<!-- 1件検索 -->
-	<select id="findUser" parameterType="string" resultMap="LoginUser">
+	<select id="findUser" parameterType="String" resultMap="LoginUser">
 		SELECT *
 		FROM userinfo
 		WHERE user_id = #{user_id}
