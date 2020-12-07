@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import com.customer.service.UserService;
 
 @Configuration
@@ -68,6 +67,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		  
 		auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
-	  }
+	}
 
 }
