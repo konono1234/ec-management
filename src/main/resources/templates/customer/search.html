@@ -2,12 +2,128 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="UTF-8">
-<title th:text="customer.index.title">customer.index.title</title>
-<link th:href="@{webjars/bootstrap/4.5.3/css/bootstrap.min.css}" rel="stylesheet"/>
+
+<link th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}" rel="stylesheet"/>
 <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-<title>Insert title here</title>
+<link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
+<script th:src="@{/js/jquery.tablesorter.min.js}"></script>
+<script>
+$(document).ready(function(){
+	$('#search-table').tablesorter();
+});
+</script>
+
+<title th:text="#{customer.search.title}">customer.search.title</title>
 </head>
 <body>
+<div class="sticky-top" style="background-color: white">
+	<div class="headerNav">
+		<div class="container">
+			<div class="row headerNavBox">
+			<a class="pull-left" href="http://www.comsize.co.jp"><img th:src="@{/images/comsize.png}" width=120px></a>
+			<a style="color: #3366FF" class="col-xs-4 col-sm-2 headerNavBtn center" th:href="@{/customer}" th:text="#{customer.index.title}" ></a>
+			<a style="color: #3366FF" class="col-xs-4 col-sm-2 headerNavBtn center" th:href="@{/goods}" th:text="#{goods.index.title}"></a>
+			<a style="color: #3366FF" class="col-xs-4 col-sm-2 headerNavBtn center" th:href="@{/order}" th:text="#{order.index.title}"></a>
+			
+			</div>
+		</div>
+	</div>
+	<div class="header"></div>
+</div>
 
+<div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 title">
+				<p th:text="#{customer.search.title}" class="title"></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xm-12 center">
+			<div th:if="${errorMessage}"><p style="color: red"  th:text="${errorMessage}"></p><br></div>
+			<div th:if="${emptyMessage}"><p style="color: red"  th:text="${emptyMessage}"></p><br></div>
+			<div th:if="${deleteMessage}"><p style="color: red"  th:text="${deleteMessage}"></p><br></div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<form class="form-inline" action="/customer/search" th:action="@{/customer/search}" method="post" th:object="${customerForm}">
+			<div class= "form-group">
+			<select class="form-control" name="key" th:field="*{key}" >
+				<option value="cust_no" th:text="#{cust_no}"></option>
+				<option value="last_nm" th:text="#{last_nm}"></option>
+				<option value="first_nm" th:text="#{first_nm}"></option>
+				<option value="gender_cd" th:text="#{gender_cd}"></option>
+				<option value="post_number" th:text="#{post_number}"></option>
+				<option value="home_address" th:text="#{home_address}"></option>
+				<option value="mail_address" th:text="#{mail_address}"></option>
+				<option value="tel_no" th:text="#{tel_no}"></option>
+				<option value="entry_date" th:text="#{entry_date}"></option>
+			</select>
+			<span>
+				<input type="text" class="form-control"  name="keyward"  th:field="*{keyword}" size="30" placeholder="キーワードを入力してください" />	
+				<span>
+					<input type="submit" class="btn btn-info" value="検索" />
+				</span>
+			</span>
+			</div>
+		</form>
+		<a class="btn btn-primary right" th:href="@{/customer/create}" th:text="#{customer.create.title}"></a>
+	</div>
+</div>
+
+<div class="container w-100 p-3">
+	<div class="row">
+	<div class="table-responsive">
+	<table class="table table-hover table-sm" id="search-table">
+		<thead>
+		<tr class="table-info">
+			<!-- 文字化け、??～～～??、「□」などが表示される場合、文字コードや半角全角をチェック（特に全角の改行は「□」となって化けて出てくる -->
+			
+			<th　th:text="#{cust_no}"></th>
+			<th th:text="#{last_nm}"></th>
+			<th th:text="#{first_nm}"></th>
+			<th th:text="#{gender_cd}"></th>
+			<th th:text="#{post_number}"></th>
+			<th th:text="#{home_address}"></th>
+			<th th:text="#{mail_address}"></th>
+			<th th:text="#{tel_no}"></th>
+			<th th:text="#{entry_date}"></th>
+		</tr>
+		</thead>
+		<!-- Controllerから渡されたBeanが入っているListを取り出し、Beanに格納された各フィールドを表示します -->
+		<tbody>
+		<tr th:each="index : ${searchList}" th:object="${searchList}">
+			<td>
+				<a href="/customer/${index.cust_no}" th:href="@{/customer/{cust_no}(cust_no=${index.cust_no})}" th:text="${index.cust_no}">1</a>
+			</td>
+			<td th:text="${index.last_nm}">1</td>
+			<td th:text="${index.first_nm}">1</td>
+
+			<!-- DB上では性別はIntegerで管理されているのでth:ifを使います -->
+			<td>
+				<span th:if="${index.gender_cd eq 1}" ><div>男</div></span>
+				<span th:if="${index.gender_cd eq 2}" ><div>女</div></span>
+				<span th:if="${index.gender_cd eq 3}" ><div>未定義</div></span>
+			</td>
+			<td th:text="${index.post_number}">1</td>
+			<td th:text="${index.home_address}">1</td>
+			<td th:text="${index.mail_address}">1</td>
+			<td th:text="${index.tel_no}">1</td>
+			<td th:text="${index.entry_date}">1</td>
+			
+		</tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+</div>
+		
 </body>
 </html>
