@@ -3,6 +3,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.customer.mapper.CustomerMapper">
+
 	<resultMap type="com.customer.bean.CustomerBean" id="customer">
 		<id column="cust_no" property="cust_no" />
 		<result column="last_nm" property="last_nm" />
@@ -12,8 +13,19 @@
 		<result column="home_address" property="home_address" />
 		<result column="mail_address" property="mail_address" />
 		<result column="entry_date" property="entry_date" />
-	
 	</resultMap>
+	
+	<resultMap type="com.customer.bean.CustomerForm" id="customerForm">
+		<id column="cust_no" property="cust_no" />
+		<result column="last_nm" property="last_nm" />
+		<result column="first_nm" property="first_nm" />
+		<result column="gender_cd" property="gender_cd" />
+		<result column="post_number" property="post_number" />
+		<result column="home_address" property="home_address" />
+		<result column="mail_address" property="mail_address" />
+		<result column="entry_date" property="entry_date" />
+	</resultMap>
+	
 	<select id="selectAllCustomer"  resultMap="customer">
 		select * from customer order by cust_no
 	</select>
@@ -25,6 +37,21 @@
 	<select id="selectByNumber" resultMap="customer" parameterType="Integer">
 		select * from customer where cust_no = #{cust_no}
 	</select>
-
+	
+	<select id="deleteByNumber" parameterType="Integer">
+		delete from customer where cust_no = #{cust_no}
+	</select>
+	
+	<select id="updateCustomer" parameterType="com.customer.bean.CustomerForm">
+		update customer set last_nm = #{last_nm}, first_nm = #{first_nm}, gender_cd = #{gender_cd}, post_number = #{post_number} , home_address = #{home_address}, tel_no = #{tel_no}, mail_address = #{mail_address} where cust_no = #{cust_no}
+	</select>
+	
+	<select id="createCustomerForm" resultMap="customerForm" parameterType="Integer">
+		select * from customer where cust_no = #{cust_no}
+	</select>
+	
+	<select id="selectByKeyword" resultMap="customer" parameterType="com.customer.bean.CustomerForm">
+		select * from customer where ${key} like concat('%', '${keyword}', '%') order by cust_no
+	</select>
 
 </mapper>

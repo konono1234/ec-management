@@ -21,4 +21,18 @@ public interface CustomerMapper {
 
   // detail
   public List<CustomerBean> selectByNumber(Integer cust_no);
+
+  // delete
+  public void deleteByNumber(Integer cust_no);
+
+  // edit
+  public void updateCustomer(CustomerForm customerForm);
+
+  // editForm
+  public CustomerForm createCustomerForm(Integer cust_no);
+
+  // search
+  public List<CustomerBean> selectByKeyword(CustomerForm customerForm);
+
+  //
 }

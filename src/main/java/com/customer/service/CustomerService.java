@@ -33,4 +33,26 @@ public class CustomerService {
     List<CustomerBean> customerList = customerMapper.selectByNumber(cust_no);
     return customerList;
   }
+
+  // delete
+  public void deleteCustomer(Integer cust_no) {
+    customerMapper.deleteByNumber(cust_no);
+  }
+
+  // edit
+  public void editCustomer(CustomerForm customerForm) {
+    customerMapper.updateCustomer(customerForm);
+  }
+
+  // editForm
+  public CustomerForm editCustomerForm(Integer cust_no) {
+    CustomerForm customerForm = customerMapper.createCustomerForm(cust_no);
+    return customerForm;
+  }
+
+  // search
+  public List<CustomerBean> searchByKeyword(CustomerForm customerForm) {
+    List<CustomerBean> customerList = customerMapper.selectByKeyword(customerForm);
+    return customerList;
+  }
 }
