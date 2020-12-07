@@ -40,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/login-edit-save/**");
 		web.ignoring().antMatchers("/login-create/**");
 		web.ignoring().antMatchers("/login-create-save/**");
+		
 	}
 
 	@Override
