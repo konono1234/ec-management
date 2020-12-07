@@ -14,8 +14,16 @@
 		<result column="entry_date" property="entry_date" />
 	
 	</resultMap>
-	<select id="findAll"  resultMap="customer">
-		select * from customer
+	<select id="selectAllCustomer"  resultMap="customer">
+		select * from customer order by cust_no
+	</select>
+	
+	<select id="insertCustomer" parameterType="com.customer.bean.CustomerForm">
+		insert into customer values (#{cust_no}, #{last_nm}, #{first_nm}, #{gender_cd}, #{post_number}, #{home_address}, #{mail_address}, #{tel_no}, #{sql_entry_date})
+	</select>
+	
+	<select id="selectByNumber" resultMap="customer" parameterType="Integer">
+		select * from customer where cust_no = #{cust_no}
 	</select>
 
 

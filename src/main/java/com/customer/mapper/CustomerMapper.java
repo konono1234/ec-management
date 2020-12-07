@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.transaction.annotation.Transactional;
 import com.customer.bean.CustomerBean;
+import com.customer.bean.CustomerForm;
 
 /*
  * DBにアクセスするマッパークラスです
@@ -12,6 +13,12 @@ import com.customer.bean.CustomerBean;
 @Mapper
 public interface CustomerMapper {
 
-  // @Select("select * from customer")
-  public List<CustomerBean> findAll();
+  // select *
+  public List<CustomerBean> selectAllCustomer();
+
+  // create
+  public void insertCustomer(CustomerForm customerForm);
+
+  // detail
+  public List<CustomerBean> selectByNumber(Integer cust_no);
 }
