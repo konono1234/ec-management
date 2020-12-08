@@ -53,14 +53,22 @@
 				<th>在庫数</th>
 				<th>商品区分</th>
 				<th>登録日</th>
+				<th></th>
 			</tr>
 			<tr th:each="g_index : ${goodsList}">
 				<td th:text="${g_index.goods_no}"></td>
 				<td th:text="${g_index.goods_name}"></td>
 				<td th:text="${g_index.price}"></td>
 				<td th:text="${g_index.stock}"></td>
-				<td th:text="${g_index.category_no}"></td>
+				<td>
+					<span th:if="${g_index.category_no eq 1}" ><div>工具</div></span>
+					<span th:if="${g_index.category_no eq 2}" ><div>農業・園芸資材</div></span>
+					<span th:if="${g_index.category_no eq 3}" ><div>未定義</div></span>
+				</td>
 				<td th:text="${g_index.reg_date}"></td>
+				<td>
+					<a th:href="@{/goods/{goods_no}(goods_no=${g_index.goods_no})}">詳細</a>
+				</td>
 			</tr>
 			</table>
 		</div>

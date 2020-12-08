@@ -16,6 +16,8 @@ public class GoodsBean {
 	private int category_no;
 	
 	private String reg_date;
+	
+	private String goods_comment;
 
 	
 	public int getGoods_no() {
@@ -64,5 +66,13 @@ public class GoodsBean {
 
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
+	}
+	
+	public String getGoods_comment() {
+		return goods_comment;
+	}
+	
+	public void setGoods_comment(String goods_comment) {
+		this.goods_comment = goods_comment;
 	}
 }

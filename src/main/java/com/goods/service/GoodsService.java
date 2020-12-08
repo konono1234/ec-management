@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.customer.bean.CustomerBean;
 import com.goods.bean.GoodsBean;
 import com.goods.mapper.GoodsMapper;
 
@@ -18,6 +20,12 @@ public class GoodsService {
 	public List<GoodsBean> selectAllGoods() {
 		List<GoodsBean> goodsList = goodsMapper.selectAllGoods();
 		return goodsList;
+	}
+	
+	//詳細
+	public List<GoodsBean> findByNumber(Integer goods_no) {
+		List<GoodsBean> goodsList = goodsMapper.selectByNumber(goods_no);
+	    return goodsList;
 	}
 
 }
