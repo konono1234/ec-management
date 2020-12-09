@@ -18,17 +18,58 @@ $(document).ready(function(){
 <body>
 <div class="sticky-top" style="background-color: white">
 	<div class="headerNav">
-		<div class="container">
+		<!--  <div class="container">
 			<div class="row headerNavBox">
 			<a class="pull-left" href="http://www.comsize.co.jp"><img th:src="@{/images/comsize.png}" width=120px></a>
 			<a style="color: #3366FF" class="col-xs-4 col-sm-2 headerNavBtn center" th:href="@{/customer}" th:text="#{customer.index.title}" ></a>
 			<a style="color: #3366FF" class="col-xs-4 col-sm-2 headerNavBtn center" th:href="@{/goods}" th:text="#{goods.index.title}"></a>
 			<a style="color: #3366FF" class="col-xs-4 col-sm-2 headerNavBtn center" th:href="@{/order}" th:text="#{order.index.title}"></a>
-			
-			</div>
+		</div>
+		-->
+	<div class="accordion-inner container">
+    <div class="row">
+    	<a class="pull-left" href="http://www.comsize.co.jp"><img th:src="@{/images/comsize.png}" width=120px></a>
+        <div class="accordion-category-box  col-xs-4 center">
+            <p class="accordion-category" style="color: #3366FF">顧客情報</p>
+            <ul class="category">
+                <li class="category-item"><a th:href="@{/customer}" th:text="#{customer.index.title}">小カテゴリa</a></li>
+                <li class="category-item"><a th:href="@{/customer/create}" th:text="#{customer.create.title}">小カテゴリb</a></li>
+            </ul>
+        </div>
+        <div class="accordion-category-box  col-xs-4 center">
+            <p class="accordion-category" style="color: #3366FF">商品情報</p>
+            <ul class="category">
+                <li class="category-item"><a th:href="@{/goods}" th:text="#{goods.index.title}">小カテゴリa</a></li>
+                <li class="category-item"><a th:href="@{/goods/create}" th:text="#{goods.create.title}">小カテゴリb</a></li>
+            </ul>
+        </div>
+        <div class="accordion-category-box  col-xs-4 center">
+            <p class="accordion-category" style="color: #3366FF">注文情報</p>
+            <ul class="category">
+                <li class="category-item"><a th:href="@{/order}" th:text="#{order.index.title}">小カテゴリa</a></li>
+                <li class="category-item"><a th:href="@{/order/create}" th:text="#{order.create.title}">小カテゴリb</a></li>
+            </ul>
+        </div>
+    </div>
+    </div>
+</div>
+<script>
+$('.accordion-category').click(function () {
+    $(this).next().slideToggle(300);
+});
+</script>
+	<div class="header"></div>
+</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xm-12 center">
+			<div th:if="${errorMessage}"><p style="color: red"  th:text="${errorMessage}"></p></div>
+			<div th:if="${emptyMessage}"><p style="color: red"  th:text="${emptyMessage}"></p></div>
+			<div th:if="${deleteMessage}"><p style="color: red"  th:text="${deleteMessage}"></p></div>
 		</div>
 	</div>
-	<div class="header"></div>
 </div>
 
 <div>
@@ -40,17 +81,6 @@ $(document).ready(function(){
 		</div>
 	</div>
 </div>
-
-<div class="container">
-	<div class="row">
-		<div class="col-xm-12 center">
-			<div th:if="${errorMessage}"><p style="color: red"  th:text="${errorMessage}"></p><br></div>
-			<div th:if="${emptyMessage}"><p style="color: red"  th:text="${emptyMessage}"></p><br></div>
-			<div th:if="${deleteMessage}"><p style="color: red"  th:text="${deleteMessage}"></p><br></div>
-		</div>
-	</div>
-</div>
-
 <div class="container">
 	<div class="row">
 		<form class="form-inline" action="/order/search" th:action="@{/order/search}" method="post" th:object="${orderForm}">

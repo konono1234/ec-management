@@ -105,7 +105,6 @@ $(document).ready(function(){
 			</td>
 			<td th:text="${index.last_nm}">1</td>
 			<td th:text="${index.first_nm}">1</td>
-
 			<!-- DB上では性別はIntegerで管理されているのでth:ifを使います -->
 			<td>
 				<span th:if="${index.gender_cd eq 1}" ><div>男</div></span>
