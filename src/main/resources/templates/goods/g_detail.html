@@ -2,10 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="UTF-8">
-<link th:href="@{webjars/bootstrap/4.5.3/css/bootstrap.min.css}" rel="stylesheet"/>
+
+<link th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}" rel="stylesheet"/>
 <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
-<title>Insert title here</title>
+
+<title th:text="#{goods.detail.title}">goods.detail.title</title>
 </head>
 <body>
 
@@ -28,7 +30,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 title">
-				<p class="title">商品情報詳細</p>
+				<p th:text="#{goods.detail.title}" class="title"></p>
 			</div>
 		</div>
 	</div>
@@ -53,26 +55,18 @@
 				<tr>
 					<th class="table-info" th:text="#{goods_no}"></th>
 					<td th:text="${list.goods_no}"></td>
-					<td class="table-info"></td>
-					<td></td>
 				</tr>
 				<tr>
 					<th class="table-info" th:text="#{goods_name}"></th>
 					<td th:text="${list.goods_name}"></td>
-					<td class="table-info"></td>
-					<td></td>
 				</tr>
 				<tr>
 					<th class="table-info" th:text="#{price}"></th>
 					<td th:text="${list.price}"></td>
-					<td class="table-info"></td>
-					<td></td>
 				</tr>
 				<tr>
 					<th class="table-info" th:text="#{stock}"></th>
 					<td th:text="${list.stock}"></td>
-					<td class="table-info"></td>
-					<td></td>
 				</tr>
 				<tr>
 					<th class="table-info" th:text="#{category_no}"></th>
@@ -81,29 +75,35 @@
 						<span th:if="${list.category_no eq 2}" ><div>農業・園芸資材</div></span>
 						<span th:if="${list.category_no eq 3}" ><div>未定義</div></span>
 					</td>
-					<td class="table-info"></td>
-					<td></td>
 				</tr>
 				<tr>
 					<th class="table-info" th:text="#{reg_date}"></th>
 					<td th:text="${list.reg_date}"></td>
-					<td class="table-info"></td>
-					<td></td>
 				</tr>
 				<tr>
 					<th class="table-info">商品の説明</th>
 					<td th:text="${list.goods_comment}"></td>
-					<td class="table-info"></td>
-					<td></td>
 				</tr>
 			</table>
 			<div class="headerNav">
 				<div class="container">
 					<div class="row headerNavBox">
-						<a class="btn btn-primary col-xs-6 col-sm-3 center" href="/customer/edit/${cust_no}" th:href="@{/goods/g_edit/{goods_no}(goods_no=${goods_no})}">編集</a>
+						<a class="btn btn-primary col-xs-6 col-sm-3 center" href="/goods/edit/${cust_no}" th:href="@{/goods/g_edit/{goods_no}(goods_no=${goods_no})}">編集</a>
 						<form class="col-xs-6 col-sm-3 center" name="test">
 							<input class="btn btn-primary  center" type="button" value="削除" onClick="kakunin()">
 						</form>
+						
+						<!-- ThymeleafとJavaScriptを組み合わせるには以下の書き方をするそうです　削除する際にポップアップを表示させたかった -->
+						<script th:inline="javascript">
+						function kakunin() {
+							/*<![CDATA[*/
+							ret = confirm("削除します。よろしいですか？");
+		  					if (ret == true){
+								location.href = /*[[ @{/goods/delete/{goods_no}(goods_no=${goods_no})} ]]*/ "ここはthymeleafで置き換わります";
+							}
+						}
+						/*]]>*/
+						</script>
 					</div>
 				</div>
 			</div>

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.customer.bean.CustomerBean;
+import com.customer.bean.CustomerForm;
 import com.goods.bean.GoodsBean;
+import com.goods.bean.GoodsForm;
 import com.goods.mapper.GoodsMapper;
 
 //商品情報を取り出すサービスクラスです
@@ -22,10 +24,26 @@ public class GoodsService {
 		return goodsList;
 	}
 	
+	//新規登録
+	public void createGoods(GoodsForm goodsForm) {
+		goodsMapper.insertGoods(goodsForm);
+	}
+	
 	//詳細
 	public List<GoodsBean> findByNumber(Integer goods_no) {
 		List<GoodsBean> goodsList = goodsMapper.selectByNumber(goods_no);
 	    return goodsList;
+	}
+	
+	//削除削除削除削除
+	  public void deleteGoods(Integer goods_no) {
+	    goodsMapper.deleteByNumber(goods_no);
+	  }
+	
+	//検索
+	public List<GoodsBean> searchByKeyword(GoodsForm goodsForm) {
+		List<GoodsBean> goodsList = goodsMapper.selectByKeyword(goodsForm);
+		return goodsList;
 	}
 
 }
