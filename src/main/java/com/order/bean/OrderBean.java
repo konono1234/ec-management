@@ -2,7 +2,7 @@ package com.order.bean;
 
 public class OrderBean {
 
-  private String order_no;
+  private int order_no;
 
   private String goods_no;
 
@@ -14,11 +14,11 @@ public class OrderBean {
 
   private String store_no;
 
-  public String getOrder_no() {
+  public int getOrder_no() {
     return order_no;
   }
 
-  public void setOrder_no(String order_no) {
+  public void setOrder_no(int order_no) {
     this.order_no = order_no;
   }
 

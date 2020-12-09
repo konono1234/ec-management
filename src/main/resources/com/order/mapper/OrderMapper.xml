@@ -30,7 +30,7 @@
 		insert into orderinfo values (#{order_no}, #{goods_no}, #{cust_no}, #{order_numbers}, #{order_date}, #{store_no})
 	</select>
 	
-	<select id="selectByOrder" resultMap="order" parameterType="Integer">
+	<select id="selectByNumber" resultMap="order" parameterType="Integer">
 		select * from orderinfo where order_no = #{order_no}
 	</select>
 	

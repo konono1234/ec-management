@@ -83,56 +83,13 @@ $(document).ready(function(){
 	<table class="table table-hover table-sm" id="index-table">
 		<thead>
 			<tr class="table-info">
-				<th th:text="#{cust_no}"></th>
-				<th th:text="#{last_nm}"></th>
-				<th th:text="#{first_nm}"></th>
-				<th th:text="#{gender_cd}"></th>
-				<th th:text="#{post_number}"></th>
-				<th th:text="#{home_address}"></th>
-				<th th:text="#{mail_address}"></th>
-				<th th:text="#{tel_no}"></th>
-				<th th:text="#{entry_date}"></th>
-				
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="index : ${customerList}" th:object="${customerList}">
-				<td>
-					<a th:href="@{/customer/{cust_no}(cust_no=${index.cust_no})}" th:text="${index.cust_no}"></a> 
-				</td>
-				<td th:text="${index.last_nm}"></td>
-				<td th:text="${index.first_nm}"></td>
-				<td>
-					<span th:if="${index.gender_cd eq 1}">男</span>
-					<span th:if="${index.gender_cd eq 2}">女</span>
-					<span th:if="${index.gender_cd eq 3}">未定義</span>
-				</td>
-				<td th:text="${index.post_number}"></td>
-				<td th:text="${index.home_address}"></td>
-				<td th:text="${index.mail_address}"></td>
-				<td th:text="${index.tel_no}"></td>
-				<td th:text="${index.entry_date}"></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-</div>
-</div>
-
-<br>
-
-<div class="container w-100 p-3">
-<div class="row">
-<div class="table-responsive">
-	<table class="table table-hover table-sm" id="index-table">
-		<thead>
-			<tr class="table-info">
 				<th th:text="#{order_no}"></th>
 				<th th:text="#{goods_no}"></th>
 				<th th:text="#{cust_no}"></th>
 				<th th:text="#{order_numbers}"></th>
 				<th th:text="#{order_date}"></th>
 				<th th:text="#{store_no}"></th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -151,5 +108,7 @@ $(document).ready(function(){
 </div>
 </div>
 </div>
+
+
 </body>
 </html>
