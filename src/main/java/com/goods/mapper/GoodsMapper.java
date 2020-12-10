@@ -26,6 +26,12 @@ public interface GoodsMapper {
 	//削除削除削除削除削除削除
 	public void deleteByNumber(Integer goods_no);
 	
+	//編集
+	public void updateGoods(GoodsForm goodsForm);
+	
+	//編集フォーム
+	public GoodsForm createGoodsForm(Integer goods_no);
+	
 	//検索
 	public List<GoodsBean> selectByKeyword(GoodsForm goodsForm);
 }

@@ -126,4 +126,31 @@ public class GoodsController {
 		
 		return "goods/g_search";
 	}
+	
+	/*
+	 * 更新画面に顧客情報が入ったデータを渡すメソッドです。
+	 */
+	@RequestMapping(value = "/goods/g_edit/{goods_no}", method = RequestMethod.GET)
+	public String editForm(@ModelAttribute GoodsForm goodsForm, @PathVariable Integer goods_no,
+			Model model) {
+
+		goodsForm = goodsService.editGoodsForm(goods_no);
+		model.addAttribute("goodsForm", goodsForm);
+		
+		return "goods/g_edit";
+	}
+
+	/*
+	 * 編集機能です。入力エラーの場合更新しません
+	 */
+	@RequestMapping(value = "/goods/save-edit")
+	public String updateSave(@ModelAttribute @Validated GoodsForm goodsForm,
+			BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			return ("goods/g_edit");
+		} else {
+			goodsService.editGoods(goodsForm);
+			return ("goods/g_save");
+		}
+	}
 }

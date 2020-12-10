@@ -36,10 +36,21 @@ public class GoodsService {
 	}
 	
 	//削除削除削除削除
-	  public void deleteGoods(Integer goods_no) {
-	    goodsMapper.deleteByNumber(goods_no);
-	  }
+	public void deleteGoods(Integer goods_no) {
+		goodsMapper.deleteByNumber(goods_no);
+	}
 	
+	//編集
+	public void editGoods(GoodsForm goodsForm) {
+		goodsMapper.updateGoods(goodsForm);
+	}
+
+	//編集フォーム
+	public GoodsForm editGoodsForm(Integer goods_no) {
+		GoodsForm goodsForm = goodsMapper.createGoodsForm(goods_no);
+		return goodsForm;
+	}
+	  
 	//検索
 	public List<GoodsBean> searchByKeyword(GoodsForm goodsForm) {
 		List<GoodsBean> goodsList = goodsMapper.selectByKeyword(goodsForm);

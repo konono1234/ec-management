@@ -74,7 +74,11 @@
 					</td>
 				</tr>
 				<tr>
-					<th class="table-info"　th:utext="#{reg_date}">home_address</th>
+					<th class="table-info" th:utext="#{goods_comment}"></th>
+					<td th:text="${goodsForm.goods_comment}"></td>
+				</tr>
+				<tr>
+					<th class="table-info"　th:utext="#{reg_date}">reg_date</th>
 					<td th:text="${goodsForm.reg_date}"></td>
 				</tr>
 			</table>

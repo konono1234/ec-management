@@ -54,6 +54,26 @@
 		WHERE goods_no = #{goods_no};
 	</delete>
 	
+	<update id="updateGoods">
+		UPDATE goods
+		SET goods_name = #{goods_name},
+			price = #{price},
+			stock = #{stock},
+			category_no = #{category_no}
+		WHERE goods_no = #{goods_no};
+		UPDATE goods_details
+		SET goods_comment = #{goods_comment}
+		WHERE goods_no = #{goods_no};
+	</update>
+	
+	<select id="createGoodsForm" resultMap="goodsForm" parameterType="Integer">
+		SELECT * 
+		FROM goods
+		JOIN goods_details
+		ON goods.goods_no = goods_details.goods_no 
+		WHERE goods.goods_no = #{goods_no}
+	</select>
+	
 	<select id="selectByKeyword" resultMap="goods" parameterType="com.goods.bean.GoodsForm">
 		SELECT * 
 		FROM goods 
