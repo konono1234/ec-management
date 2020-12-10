@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.CheckUpdateTime;
 import com.order.bean.OrderBean;
 import com.order.bean.OrderForm;
 import com.order.service.OrderService;
@@ -127,29 +128,30 @@ public class OrderController {
       Model model) {
     orderForm = orderService.editOrderForm(order_no);
     model.addAttribute("orderForm", orderForm);
-    System.out.println("編集前の更新時間" + orderForm.getUpdate_date());
+    // System.out.println("編集前の更新時間" + orderForm.getUpdate_date());
     return "order/o_edit";
   }
 
   /*
-   * 編集機能です。入力エラーの場合更新しません
+   * 編集機能です。入力エラー、排他制御に引っかかった場合更新しません
    */
   @RequestMapping(value = "/order/save-edit")
   public String updateSave(@ModelAttribute @Validated OrderForm orderForm,
       BindingResult bindingResult, Model model) {
+    CheckUpdateTime check = new CheckUpdateTime(orderForm.getUpdate_date(),
+        orderService.checkByTime(orderForm.getOrder_no()));
 
-    System.out.println("フォームの更新時間" + orderForm.getUpdate_date());
-    System.out.println("DB上の更新時間" + orderService.checkByTime(orderForm.getCust_no()));
+    // System.out.println("フォームの更新時間" + orderForm.getUpdate_date());
+    // System.out.println("DB上の更新時間" + orderService.checkByTime(orderForm.getCust_no()));
 
     if (bindingResult.hasErrors()) {
       return ("order/o_edit");
-    } else if (orderService.checkByTime(orderForm.getCust_no())
-        .equals(orderForm.getUpdate_date())) {
+    } else if (check.checkExclusion()) {
       orderService.editOrder(orderForm);
       return ("order/o_save");
     } else {
       model.addAttribute("errorMessage",
-          "他のユーザーが注文番号" + orderForm.getCust_no() + "の情報を編集したため、編集できません。一覧に戻り確認をお願いします");
+          "他のユーザーが注文番号" + orderForm.getOrder_no() + "の情報を編集したため、編集できません。一覧に戻り確認をお願いします");
       return ("order/o_edit");
     }
   }

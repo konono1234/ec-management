@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.CheckUpdateTime;
 import com.customer.bean.CustomerBean;
 import com.customer.bean.CustomerForm;
 import com.customer.service.CustomerService;
@@ -71,7 +72,7 @@ public class CustomerController {
       }
 
     }
-    
+
 
   }
 
@@ -147,11 +148,20 @@ public class CustomerController {
   @RequestMapping(value = "/customer/save-edit")
   public String updateSave(@ModelAttribute @Validated CustomerForm customerForm,
       BindingResult bindingResult, Model model) {
+
+    CheckUpdateTime check = new CheckUpdateTime(customerForm.getUpdate_date(),
+        customerService.checkByTime(customerForm.getCust_no()));
+
     if (bindingResult.hasErrors()) {
       return ("customer/edit");
-    } else {
+    } else if (check.checkExclusion()) {
       customerService.editCustomer(customerForm);
       return ("customer/save");
+
+    } else {
+      model.addAttribute("errorMessage",
+          "他のユーザーが顧客番号" + customerForm.getCust_no() + "の情報を編集したので編集できません。一覧に戻って確認をお願いします");
+      return ("customer/edit");
     }
   }
 

@@ -16,13 +16,9 @@ import org.hibernate.validator.constraints.Length;
 public class CustomerForm {
 
   @NotNull(message = "{NotNull}")
-
-
-  private Integer cust_no;
-
   @Pattern(regexp = "^[0-9]*$", message = "{0}は半角数字のみで入力してください")
   @Size(min = 1, max = 8, message = "{Size}")
-  private String check_no;
+  private String cust_no;
 
   @NotNull(message = "{NotNull}")
   @Size(min = 1, max = 16, message = "{Size}")
@@ -63,27 +59,12 @@ public class CustomerForm {
 
   private String keyword;
 
-  public Integer getCust_no() {
+  public String getCust_no() {
     return cust_no;
   }
 
-  public void setCust_no(Integer cust_no) {
+  public void setCust_no(String cust_no) {
     this.cust_no = cust_no;
-  }
-
-  public void setCheck_no(String check_no) {
-    this.check_no = check_no;
-    try {
-      if (this.check_no != null) {
-        this.cust_no = Integer.parseInt(check_no);
-      }
-    } catch (Exception e) {
-
-    }
-  }
-
-  public String getCheck_no() {
-    return check_no;
   }
 
   public String getLast_nm() {

@@ -53,12 +53,10 @@
 			<!-- 顧客番号 -->
 			<tr>
 			<th>
-			<div>
 				<div class="form-group">
 				<label style="background: pink" class="control-label" for="id_cust_no"  >顧客番号(変更不可)</label>
 				<input class="form-control" id="id_cust_no" type="text" name="cust_no" th:field="*{cust_no}" readonly/>
-				<span th:if="${#fields.hasErrors('check_no')}" th:errors="*{check_no}" style="color: red"></span>
-			</div>
+				<span th:if="${#fields.hasErrors('cust_no')}" th:errors="*{cust_no}" style="color: red"></span>
 			</div>
 			</th>
 			</tr>
@@ -156,6 +154,17 @@
 			</div>
 		</th>
 		</tr>
+		<!-- 更新時間 -->
+			<tr>
+			<th>
+				<div class="form-group">
+				<label style="background: pink" class="control-label" for="id_update_date"  >最終更新時間(自動更新)</label>
+				<input class="form-control" id="id_update_date" type="text" name="update_date" th:field="*{update_date}" readonly/>
+				<span th:if="${#fields.hasErrors('update_date')}" th:errors="*{update_date}" style="color: red"></span>
+			</div>
+			</th>
+			</tr>
+
 		
 		
 			</table>

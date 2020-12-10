@@ -56,8 +56,8 @@
 		<th>
 			<div class="form-group">
 				<label class="control-label" for="id_cust_no" th:text="#{cust_no}" >cust_no</label>
-				<input class="form-control" id="id_cust_no" type="text" name="check_no" th:field="*{check_no}" placeholder="例：1234"/>
-				<span th:if="${#fields.hasErrors('check_no')}" th:errors="*{check_no}" style="color: red"></span>
+				<input class="form-control" id="id_cust_no" type="text" name="cust_no" th:field="*{cust_no}" placeholder="例：1234"/>
+				<span th:if="${#fields.hasErrors('cust_no')}" th:errors="*{cust_no}" style="color: red"></span>
 			</div>
 		</th>
 		</tr>

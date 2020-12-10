@@ -27,6 +27,8 @@ public class CustomerBean {
 
   private String entry_date;
 
+  private String update_date;
+
   public int getCust_no() {
     return cust_no;
   }
@@ -97,6 +99,14 @@ public class CustomerBean {
 
   public void setEntry_date(String entry_date) {
     this.entry_date = entry_date;
+  }
+
+  public String getUpdate_date() {
+    return update_date;
+  }
+
+  public void setUpdate_date(String update_date) {
+    this.update_date = update_date;
   }
 
 }

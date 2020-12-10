@@ -55,4 +55,10 @@ public class CustomerService {
     List<CustomerBean> customerList = customerMapper.selectByKeyword(customerForm);
     return customerList;
   }
+
+  // checkbyNumber
+  public String checkByTime(String cust_no) {
+    String update_date = customerMapper.updateTime(cust_no);
+    return update_date;
+  }
 }

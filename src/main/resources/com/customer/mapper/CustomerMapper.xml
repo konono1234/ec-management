@@ -56,7 +56,7 @@
 		select * from customer where ${key} like concat('%', '${keyword}', '%') order by cust_no
 	</select>
 	
-	<select id="updateTime" resultMap="String" parameterType="String" >
+	<select id="updateTime" resultType="String" parameterType="String" >
 		select update_date from customer where cust_no = #{cust_no}
 	</select>
 
