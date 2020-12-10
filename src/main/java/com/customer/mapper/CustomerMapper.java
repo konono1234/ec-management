@@ -34,5 +34,6 @@ public interface CustomerMapper {
   // search
   public List<CustomerBean> selectByKeyword(CustomerForm customerForm);
 
-  //
+  // haitaseigyo
+  public String checkByTime(String cust_no);
 }

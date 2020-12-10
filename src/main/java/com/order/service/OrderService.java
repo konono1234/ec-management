@@ -51,4 +51,10 @@ public class OrderService {
     List<OrderBean> orderList = orderMapper.selectByKeyword(orderForm);
     return orderList;
   }
+
+  // checkByTime
+  public String checkByTime(String order_no) {
+    String update_date = orderMapper.updateTime(order_no);
+    return update_date;
+  }
 }

@@ -14,6 +14,8 @@ public class OrderBean {
 
   private String store_no;
 
+  private String update_date;
+
   public int getOrder_no() {
     return order_no;
   }
@@ -60,5 +62,13 @@ public class OrderBean {
 
   public void setStore_no(String store_no) {
     this.store_no = store_no;
+  }
+
+  public String getUpdate_date() {
+    return update_date;
+  }
+
+  public void setUpdate_date(String update_date) {
+    this.update_date = update_date;
   }
 }

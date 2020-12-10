@@ -11,6 +11,7 @@
 		<result column="order_numbers" property="order_numbers" />
 		<result column="order_date" property="order_date" />
 		<result column="store_no" property="store_no" />
+		<result column="update_date" property="update_date" />
 	</resultMap>
 	
 	<resultMap type="com.order.bean.OrderForm" id="orderForm">
@@ -20,27 +21,28 @@
 		<result column="order_numbers" property="order_numbers" />
 		<result column="order_date" property="order_date" />
 		<result column="store_no" property="store_no" />
+		<result column="update_date" property="update_date" />
 	</resultMap>
 	
 	<select id="selectAllOrder"  resultMap="order">
 		select * from orderinfo order by order_no
 	</select>
 	
-	<select id="insertOrder" parameterType="com.order.bean.OrderForm">
-		insert into orderinfo values (#{order_no}, #{goods_no}, #{cust_no}, #{order_numbers}, #{order_date}, #{store_no})
-	</select>
+	<insert id="insertOrder" parameterType="com.order.bean.OrderForm">
+		insert into orderinfo values (#{order_no}, #{goods_no}, #{cust_no}, #{order_numbers}, #{order_date}, #{store_no}, getdate())
+	</insert>
 	
 	<select id="selectByNumber" resultMap="order" parameterType="Integer">
 		select * from orderinfo where order_no = #{order_no}
 	</select>
 	
-	<select id="deleteByNumber" parameterType="Integer">
+	<delete id="deleteByNumber" parameterType="Integer">
 		delete from orderinfo where order_no = #{order_no}
-	</select>
+	</delete>
 	
-	<select id="updateOrder" parameterType="com.order.bean.OrderForm">
-		update orderinfo set goods_no = #{goods_no}, cust_no = #{cust_no}, order_numbers = #{order_numbers}, order_date = #{order_date} , store_no = #{store_no} where order_no = #{order_no}
-	</select>
+	<update id="updateOrder" parameterType="com.order.bean.OrderForm">
+		update orderinfo set goods_no = #{goods_no}, cust_no = #{cust_no}, order_numbers = #{order_numbers}, order_date = #{order_date} , store_no = #{store_no}, update_date = getdate() where order_no = #{order_no}
+	</update>
 	
 	<select id="createOrderForm" resultMap="orderForm" parameterType="Integer">
 		select * from orderinfo where order_no = #{order_no}
@@ -48,6 +50,10 @@
 	
 	<select id="selectByKeyword" resultMap="order" parameterType="com.order.bean.OrderForm">
 		select * from orderinfo where ${key} like concat('%', '${keyword}', '%') order by order_no
+	</select>
+	
+	<select id="updateTime" resultType="String" parameterType="String">
+		select update_date from orderInfo where order_no = #{order_no}
 	</select>
 
 </mapper>

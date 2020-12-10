@@ -34,4 +34,7 @@ public interface OrderMapper {
   // search
   public List<OrderBean> selectByKeyword(OrderForm orderForm);
 
+  // haitaseigyo
+  public String updateTime(String order_no);
+
 }

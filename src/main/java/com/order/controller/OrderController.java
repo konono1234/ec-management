@@ -127,7 +127,7 @@ public class OrderController {
       Model model) {
     orderForm = orderService.editOrderForm(order_no);
     model.addAttribute("orderForm", orderForm);
-
+    System.out.println("編集前の更新時間" + orderForm.getUpdate_date());
     return "order/o_edit";
   }
 
@@ -137,11 +137,20 @@ public class OrderController {
   @RequestMapping(value = "/order/save-edit")
   public String updateSave(@ModelAttribute @Validated OrderForm orderForm,
       BindingResult bindingResult, Model model) {
+
+    System.out.println("フォームの更新時間" + orderForm.getUpdate_date());
+    System.out.println("DB上の更新時間" + orderService.checkByTime(orderForm.getCust_no()));
+
     if (bindingResult.hasErrors()) {
       return ("order/o_edit");
-    } else {
+    } else if (orderService.checkByTime(orderForm.getCust_no())
+        .equals(orderForm.getUpdate_date())) {
       orderService.editOrder(orderForm);
       return ("order/o_save");
+    } else {
+      model.addAttribute("errorMessage",
+          "他のユーザーが注文番号" + orderForm.getCust_no() + "の情報を編集したため、編集できません。一覧に戻り確認をお願いします");
+      return ("order/o_edit");
     }
   }
 }

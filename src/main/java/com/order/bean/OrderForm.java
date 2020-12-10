@@ -38,6 +38,8 @@ public class OrderForm {
 
   private String keyword;
 
+  private String update_date;
+
   public String getOrder_no() {
     return order_no;
   }
@@ -116,6 +118,14 @@ public class OrderForm {
     } else {
       this.keyword = keyword;
     }
+  }
+
+  public String getUpdate_date() {
+    return update_date;
+  }
+
+  public void setUpdate_date(String update_date) {
+    this.update_date = update_date;
   }
 
 }

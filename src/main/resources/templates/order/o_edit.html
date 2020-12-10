@@ -54,18 +54,17 @@
 			<!-- 注文番号 -->
 			<tr>
 			<th>
-			<div>
-				<div class="form-group">
+			<div class="form-group">
 				<label style="background: pink" class="control-label" for="id_order_no"  >注文番号(変更不可)</label>
 				<input class="form-control" id="id_order_no" type="text" name="order_no" th:field="*{order_no}" readonly/>
 				<span th:if="${#fields.hasErrors('order_no')}" th:errors="*{order_no}" style="color: red"></span>
 			</div>
-			</div>
 			</th>
 			</tr>
-			<tr>
-		<th>
+			
 			<!--  商品番号　-->
+			<tr>
+			<th>
 			<div class="form-group">
 				<label class="control-label" for="id_goods_no" th:text="#{goods_no}">goods_no</label>
 				<span>
@@ -125,6 +124,16 @@
 			</div>
 		</th>
 		</tr>
+		<!-- 更新日時 -->
+			<tr>
+			<th>
+			<div class="form-group">
+				<label style="background: pink" class="control-label" for="id_update_date"  >最終更新日時(自動更新)</label>
+				<input class="form-control" id="id_update_date" type="text" name="update_date" th:field="*{update_date}" readonly/>
+				<span th:if="${#fields.hasErrors('update_date')}" th:errors="*{update_date}" style="color: red"></span>
+			</div>
+			</th>
+			</tr>
 			</table>
 			<div>
 				<input class="btn btn-primary right" type="submit" value="変更" />

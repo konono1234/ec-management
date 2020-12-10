@@ -13,6 +13,7 @@
 		<result column="home_address" property="home_address" />
 		<result column="mail_address" property="mail_address" />
 		<result column="entry_date" property="entry_date" />
+		<result column="update_date" property="update_date" />
 	</resultMap>
 	
 	<resultMap type="com.customer.bean.CustomerForm" id="customerForm">
@@ -24,27 +25,28 @@
 		<result column="home_address" property="home_address" />
 		<result column="mail_address" property="mail_address" />
 		<result column="entry_date" property="entry_date" />
+		<result column="update_date" property="update_date" />
 	</resultMap>
 	
 	<select id="selectAllCustomer"  resultMap="customer">
 		select * from customer order by cust_no
 	</select>
 	
-	<select id="insertCustomer" parameterType="com.customer.bean.CustomerForm">
-		insert into customer values (#{cust_no}, #{last_nm}, #{first_nm}, #{gender_cd}, #{post_number}, #{home_address}, #{mail_address}, #{tel_no}, #{sql_entry_date})
-	</select>
+	<insert id="insertCustomer" parameterType="com.customer.bean.CustomerForm">
+		insert into customer values (#{cust_no}, #{last_nm}, #{first_nm}, #{gender_cd}, #{post_number}, #{home_address}, #{mail_address}, #{tel_no}, #{sql_entry_date}, getDate())
+	</insert>
 	
 	<select id="selectByNumber" resultMap="customer" parameterType="Integer">
 		select * from customer where cust_no = #{cust_no}
 	</select>
 	
-	<select id="deleteByNumber" parameterType="Integer">
+	<delete id="deleteByNumber" parameterType="Integer">
 		delete from customer where cust_no = #{cust_no}
-	</select>
+	</delete>
 	
-	<select id="updateCustomer" parameterType="com.customer.bean.CustomerForm">
-		update customer set last_nm = #{last_nm}, first_nm = #{first_nm}, gender_cd = #{gender_cd}, post_number = #{post_number} , home_address = #{home_address}, tel_no = #{tel_no}, mail_address = #{mail_address} where cust_no = #{cust_no}
-	</select>
+	<update id="updateCustomer" parameterType="com.customer.bean.CustomerForm">
+		update customer set last_nm = #{last_nm}, first_nm = #{first_nm}, gender_cd = #{gender_cd}, post_number = #{post_number} , home_address = #{home_address}, tel_no = #{tel_no}, mail_address = #{mail_address}, update_date = getDate() where cust_no = #{cust_no}
+	</update>
 	
 	<select id="createCustomerForm" resultMap="customerForm" parameterType="Integer">
 		select * from customer where cust_no = #{cust_no}
@@ -52,6 +54,10 @@
 	
 	<select id="selectByKeyword" resultMap="customer" parameterType="com.customer.bean.CustomerForm">
 		select * from customer where ${key} like concat('%', '${keyword}', '%') order by cust_no
+	</select>
+	
+	<select id="updateTime" resultMap="String" parameterType="String" >
+		select update_date from customer where cust_no = #{cust_no}
 	</select>
 
 </mapper>

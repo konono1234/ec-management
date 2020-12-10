@@ -16,6 +16,8 @@ import org.hibernate.validator.constraints.Length;
 public class CustomerForm {
 
   @NotNull(message = "{NotNull}")
+
+
   private Integer cust_no;
 
   @Pattern(regexp = "^[0-9]*$", message = "{0}は半角数字のみで入力してください")
@@ -54,6 +56,8 @@ public class CustomerForm {
   private String entry_date = sdf.format(calender.getTime());
 
   private Date sql_entry_date = Date.valueOf(entry_date);
+
+  private String update_date;
 
   private String key;
 
@@ -179,5 +183,13 @@ public class CustomerForm {
     } else {
       this.keyword = keyword;
     }
+  }
+
+  public String getUpdate_date() {
+    return update_date;
+  }
+
+  public void setUpdate_date(String update_date) {
+    this.update_date = update_date;
   }
 }
