@@ -2,27 +2,61 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="UTF-8">
-<link th:href="@{webjars/bootstrap/4.5.3/css/bootstrap.min.css}" rel="stylesheet"/>
+<link th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}" rel="stylesheet"/>
 <link th:href="@{/css/stylesheet.css}" rel="stylesheet"/>
 <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <title th:text="#{customer.index.title}">customer.index.title</title>
 </head>
 <body>
-<div th:if="${param.error}">
-  	<p style="color: red"th:text="#{login.failure}"/>
+<a th:href="@{/customer}"><img th:src="@{/images/comsize.png}" width= 120px></a>
+<div class="header">
+	<div class="container ">
+		<div class="row">
+			<div class="col-xs-12 title">
+				<p th:text="#{login.login.title}" class="title"></p>
+			</div>
+		</div>
+	</div>
+</div>
+ <div class="contaner">
+	<div class="row">
+		<div class="col-xm-12 center">
+			<div th:if="${param.logout}">
+				<p style="color: red"th:text="#{logout.done}"/>
+			</div>
+			<div th:if="${param.error}">
+				<p style="color: red"th:text="#{login.failure}"/>
+			</div>
+			<div th:if="${saveMessage}">
+				<p style="color: red" th:text="#{login.save}" />
+			</div>
+		</div>
+	</div>
 </div>
 <div class="container">
-   <p style="text-align: center;">Login</p>
-   <form class="form" th:action="@{/login}" method="post">
-        
-        <p>
-          <input type="text" id="username" name="username" class="form-control" placeholder="UserID" required>
-        </p>
-        <p>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-        </p>
-        <button class="btn btn-primary" type="submit"　th:value= "#{login.submit}">ログイン</button>
-   </form>
+	<div class="row">
+		<div class="col-xm-12 center">
+			<form role="form" th:action="@{/login}"  method="post">
+				<table> 
+					<div class="form-group">
+						<label class="control-label" for="username" th:utext="#{login.username}"></label>
+						<div>
+							<input type="text" id="username" name="username" class="form-control" placeholder="UserID" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="username" th:utext="#{login.username}"></label>
+						<div>
+							<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+						</div>
+					</div>
+				</table>
+				<div>
+					<button class="btn btn-primary" type="submit"　th:value= "#{login.submit}">ログイン</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 </body>
 </html>

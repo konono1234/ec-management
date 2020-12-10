@@ -1,1 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goods.mapper.GoodsMapper">
+	
+	<resultMap type="com.goods.bean.GoodsBean" id="goods">
+		<id column="goods_no" property="goods_no" />
+		<result column="goods_name" property="goods_name" />
+		<result column="price" property="price" />
+		<result column="stock" property="stock" />
+		<result column="category_no" property="category_no" />
+		<result column="reg_date" property="reg_date" />
+		<result column="goods_comment" property="goods_comment" />
+	</resultMap>
+	
+	<resultMap type="com.goods.bean.GoodsForm" id="goodsForm">
+		<id column="goods_no" property="goods_no" />
+		<result column="goods_name" property="goods_name" />
+		<result column="price" property="price" />
+		<result column="stock" property="stock" />
+		<result column="category_no" property="category_no" />
+		<result column="reg_date" property="reg_date" />
+		<result column="goods_comment" property="goods_comment" />
+	</resultMap>
+	
+	<select id="selectAllGoods"  resultMap="goods">
+		SELECT * 
+		FROM goods 
+		ORDER BY goods_no
+	</select>
+	
+	<insert id="insertGoods">
+		SET XACT_ABORT ON;
+		BEGIN TRANSACTION;
+		INSERT INTO goods
+		VALUES (#{goods_no},#{goods_name},#{price},#{stock},#{category_no},#{sql_reg_date});
+		INSERT INTO goods_details
+		VALUES (#{goods_no},#{goods_comment});
+		COMMIT TRANSACTION;
+	</insert>
+	
+	<select id="selectByNumber" resultMap="goods">
+		SELECT * 
+		FROM goods 
+		JOIN goods_details
+		ON goods.goods_no = goods_details.goods_no
+		WHERE goods.goods_no = #{goods_no};		
+	</select>
+	
+	<delete id="deleteByNumber">
+		SET XACT_ABORT ON;
+		BEGIN TRANSACTION;
+		DELETE 
+		FROM goods
+		WHERE goods_no = #{goods_no};
+		DELETE
+		FROM goods_details
+		WHERE goods_no = #{goods_no};
+		COMMIT TRANSACTION;
+	</delete>
+	
+	<update id="updateGoods">
+		SET XACT_ABORT ON;
+		BEGIN TRANSACTION;
+		UPDATE goods
+		SET goods_name = #{goods_name},
+			price = #{price},
+			stock = #{stock},
+			category_no = #{category_no}
+		WHERE goods_no = #{goods_no};
+		UPDATE goods_details
+		SET goods_comment = #{goods_comment}
+		WHERE goods_no = #{goods_no};
+		COMMIT TRANSACTION;
+	</update>
+	
+	<select id="createGoodsForm" resultMap="goodsForm" parameterType="Integer">
+		SELECT * 
+		FROM goods
+		JOIN goods_details
+		ON goods.goods_no = goods_details.goods_no 
+		WHERE goods.goods_no = #{goods_no}
+	</select>
+	
+	<select id="selectByKeyword" resultMap="goods" parameterType="com.goods.bean.GoodsForm">
+		SELECT * 
+		FROM goods 
+		WHERE ${key} like concat('%', '${keyword}', '%') ORDER BY goods_no
+	</select>
+</mapper>
