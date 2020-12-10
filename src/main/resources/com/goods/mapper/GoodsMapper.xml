@@ -31,10 +31,13 @@
 	</select>
 	
 	<insert id="insertGoods">
+		SET XACT_ABORT ON;
+		BEGIN TRANSACTION;
 		INSERT INTO goods
 		VALUES (#{goods_no},#{goods_name},#{price},#{stock},#{category_no},#{sql_reg_date});
 		INSERT INTO goods_details
 		VALUES (#{goods_no},#{goods_comment});
+		COMMIT TRANSACTION;
 	</insert>
 	
 	<select id="selectByNumber" resultMap="goods">
@@ -46,15 +49,20 @@
 	</select>
 	
 	<delete id="deleteByNumber">
+		SET XACT_ABORT ON;
+		BEGIN TRANSACTION;
 		DELETE 
 		FROM goods
 		WHERE goods_no = #{goods_no};
 		DELETE
 		FROM goods_details
 		WHERE goods_no = #{goods_no};
+		COMMIT TRANSACTION;
 	</delete>
 	
 	<update id="updateGoods">
+		SET XACT_ABORT ON;
+		BEGIN TRANSACTION;
 		UPDATE goods
 		SET goods_name = #{goods_name},
 			price = #{price},
@@ -64,6 +72,7 @@
 		UPDATE goods_details
 		SET goods_comment = #{goods_comment}
 		WHERE goods_no = #{goods_no};
+		COMMIT TRANSACTION;
 	</update>
 	
 	<select id="createGoodsForm" resultMap="goodsForm" parameterType="Integer">
